@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrimePark</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>
+      <a img src="logo.jpg" alt="headerlogo">
+      </a>
+    </h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="register.html">Register</a>
+      <a href="about us.html">About Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="slideshow">
+  <div class="slideshow-container">
+    <img src="park.jpg" class="slide active" alt="Slide 1">
+    <img src="park2.jpg" class="slide" alt="Slide 2">
+    <img src="park3.jpg" class="slide" alt="Slide 3">
+    <a class="prev">&#10094;</a>
+    <a class="next">&#10095;</a> 
+  </div>
+</section>
+    <section class="hero">
+      <h2 class="old-english">PrimePark</h2>
+      <p>Welcome to PrimePark — Real-time parking, right when you need it.</p>
+    </section>
+
+    <section class="features">
+  <div class="container">
+    <h2>Reserve your spot before you arrive.</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Real-Time Parking Finder</h3>
+        <p>Find available parking spots instantly with real-time updates.</p>
+      </div>
+      <div class="card">
+        <h3>Advance Reservation</h3>
+        <p>Plan ahead and park stress-free.</p>
+      </div>
+      <div class="card">
+        <h3>Smart Payment & Access</h3>
+        <p>Smooth entry and exit with automated systems.</p>
+      </div>
+      <div class="card">
+        <h3>Parking Monitoring & History</h3>
+        <p>Stay organized with detailed parking records.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Parking System</p>
+  </footer>
+
+  <script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll(".slide");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
+
+  function showSlide(index) {
+    slides.forEach((slide) => slide.classList.remove("active"));
+    slideIndex = (index + slides.length) % slides.length; 
+    slides[slideIndex].classList.add("active");
+  }
+
+  function autoSlide() {
+    showSlide(slideIndex + 1);
+    setTimeout(autoSlide, 4000);
+  }
+
+
+  prev.addEventListener("click", () => showSlide(slideIndex - 1));
+  next.addEventListener("click", () => showSlide(slideIndex + 1));
+
+  
+  window.onload = () => {
+    showSlide(slideIndex);
+    setTimeout(autoSlide, 3000);
+  };
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</body>
+</html>
+
+
