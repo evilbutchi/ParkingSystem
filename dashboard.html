@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard - PrimePark</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2 class="old-english">Parking System</h2>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#" id="profileLink">Profile</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" id="logoutLink">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dashboard-container">
+      <h1>My Dashboard</h1>
+      
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <h3>🚗 Active Reservations</h3>
+          <p class="dashboard-stat" id="activeReservations">0</p>
+          <button class="btn-dashboard">View Details</button>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>💰 Total Spent</h3>
+          <p class="dashboard-stat" id="totalSpent">$0.00</p>
+          <button class="btn-dashboard">Payment History</button>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>⏱️ Available Hours</h3>
+          <p class="dashboard-stat" id="availableHours">48h</p>
+          <button class="btn-dashboard">Buy More</button>
+        </div>
+
+        <div class="dashboard-card">
+          <h3>📍 Favorite Locations</h3>
+          <p class="dashboard-stat" id="favoriteCount">3</p>
+          <button class="btn-dashboard">Manage</button>
+        </div>
+      </div>
+
+      <section class="recent-activity">
+        <h2>Recent Parking Activity</h2>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-time">Today, 2:30 PM</div>
+            <div class="activity-details">
+              <p><strong>Downtown Parking Lot</strong></p>
+              <p>Duration: 2 hours | Cost: $8.00</p>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-time">Yesterday, 1:15 PM</div>
+            <div class="activity-details">
+              <p><strong>Airport Terminal B</strong></p>
+              <p>Duration: 4 hours | Cost: $16.00</p>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-time">April 12, 6:45 AM</div>
+            <div class="activity-details">
+              <p><strong>Shopping Mall Central</strong></p>
+              <p>Duration: 1.5 hours | Cost: $6.00</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <button class="btn-action btn-primary">Find Parking</button>
+          <button class="btn-action btn-secondary">Reserve Spot</button>
+          <button class="btn-action btn-secondary">View Map</button>
+          <button class="btn-action btn-secondary">Settings</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Profile Modal -->
+  <div id="profileModal" class="modal">
+    <div class="modal-content">
+      <span class="close" data-modal="profileModal">&times;</span>
+      <h2>My Profile</h2>
+      <div class="profile-info">
+        <div class="profile-field">
+          <label>Name:</label>
+          <p id="profileName">-</p>
+        </div>
+        <div class="profile-field">
+          <label>Email:</label>
+          <p id="profileEmail">-</p>
+        </div>
+        <div class="profile-field">
+          <label>Phone:</label>
+          <p id="profilePhone">-</p>
+        </div>
+      </div>
+      <button id="editProfileBtn" class="btn-submit">Edit Profile</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Parking System</p>
+  </footer>
+
+  <script>
+    let currentUser = null;
+
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    document.getElementById("profileLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentUser) {
+        document.getElementById("profileName").textContent = currentUser.name;
+        document.getElementById("profileEmail").textContent = currentUser.email;
+        document.getElementById("profilePhone").textContent = currentUser.phone || "-";
+        openModal("profileModal");
+      }
+    });
+
+    document.getElementById("logoutLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    });
+
+    document.querySelectorAll(".close").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const modalId = e.target.getAttribute("data-modal");
+        closeModal(modalId);
+      });
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target.classList.contains("modal")) {
+        e.target.style.display = "none";
+      }
+    });
+
+    // Check if user is logged in
+    window.addEventListener("load", () => {
+      const savedUser = localStorage.getItem("currentUser");
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+      } else {
+        alert("Please log in first!");
+        window.location.href = "index.html";
+      }
+    });
+
+    // Dashboard functionality
+    document.querySelectorAll(".btn-action").forEach(btn => {
+      btn.addEventListener("click", function() {
+        alert("Feature coming soon: " + this.textContent);
+      });
+    });
+
+    document.querySelectorAll(".btn-dashboard").forEach(btn => {
+      btn.addEventListener("click", function() {
+        alert("Feature coming soon: " + this.parentElement.querySelector("h3").textContent);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</body>
+</html>
